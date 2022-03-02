@@ -4,9 +4,9 @@ This repository contains pretrained models for Guy's relation learning project t
 
 ### Temporal classification (TC) models trained with or without horizontal/vertical flip augmentations
 
-We trained four models on headcam data from *baby S* (sampled at 1 fps; ~741K frames) using the temporal classification objective. All models were trained for 20 epochs using the Adam optimizer with learning rate 0.0005. The models only differ in whether or not horizontal/vertical flip augmentations were used during training. These models are useful for testing the effect of horizontal/vertical flip augmentations in relational learning.
+We trained four models on headcam data from **baby S** (sampled at 1 fps; ~741K frames total) using the temporal classification objective. All models were trained for 20 epochs using the Adam optimizer with learning rate 0.0005. The models only differ in whether or not horizontal/vertical flip augmentations were used during training. These models are useful for testing the effect of horizontal/vertical flip augmentations in relational learning.
 
-* [`TC-S-hv`](): model using both horizontal and vertical flip augmentations. The data augmentation pipeline used during pre-training (where `transforms` is `torchvision.transforms`):
+* [`TC-S-hv`](https://drive.google.com/file/d/1Q5eIZyA00vSxboYC1dcb6BZa6BzP5Pe5/view?usp=sharing): model using both horizontal and vertical flip augmentations. The data augmentation pipeline used during pre-training (where `transforms` is `torchvision.transforms`):
 ```python
 transforms.Compose([
     transforms.RandomResizedCrop(224, scale=(0.08, 1.0)),
@@ -20,7 +20,7 @@ transforms.Compose([
     ])
 ```
 
-* [`TC-S-h`](): model using only horizontal flip augmentations. The data augmentation pipeline used during pre-training:
+* [`TC-S-h`](https://drive.google.com/file/d/1eLt-sDh3GSFDReu2KFr7Zv8xSRl_of2n/view?usp=sharing): model using only horizontal flip augmentations. The data augmentation pipeline used during pre-training:
 ```python
 transforms.Compose([
     transforms.RandomResizedCrop(224, scale=(0.08, 1.0)),
@@ -33,7 +33,7 @@ transforms.Compose([
     ])
 ```
 
-* [`TC-S-v`](): model using only vertical flip augmentations. The data augmentation pipeline used during pre-training:
+* [`TC-S-v`](https://drive.google.com/file/d/1Huvc8_xB0Vd9OikJ3r6UfejPZl4b-0ef/view?usp=sharing): model using only vertical flip augmentations. The data augmentation pipeline used during pre-training:
 ```python
 transforms.Compose([
     transforms.RandomResizedCrop(224, scale=(0.08, 1.0)),
@@ -46,7 +46,7 @@ transforms.Compose([
     ])
 ```
 
-* [`TC-S`](): model not using any horizontal or vertical flip augmentations. The data augmentation pipeline used during pre-training:
+* [`TC-S`](https://drive.google.com/file/d/1Yd6GqZRySDICmL1nMJ8bebtjigg3H8r0/view?usp=sharing): model not using any horizontal or vertical flip augmentations. The data augmentation pipeline used during pre-training:
 ```python
 transforms.Compose([
     transforms.RandomResizedCrop(224, scale=(0.08, 1.0)),
@@ -77,10 +77,9 @@ where `2575` is the number of temporal classes in this case.
 We further trained two models using the self-supervised DINO algorithm either on the headcam data from baby S described above or on ImageNet. The models were trained identically, the only difference was the dataset used for training, hence this pair of models are useful for testing the effect of pretraining dataset on relation learning. Both models were trained for 30 epochs.
 
 * [`DINO-S`](): DINO model trained on headcam data from baby S.
-
 * [`DINO-ImageNet`](): DINO model trained on ImageNet.
 
-For loading these checkpoints, I provide a function [`load_dino_model`]() in this repository; simply use it like this:
+For loading these checkpoints, I provide a function [`load_dino_model`](https://github.com/eminorhan/models-for-guy/blob/master/load_dino_model.py) in this repository; simply use it like this:
 ```python
 model = models.resnext50_32x4d(pretrained=False)
 model = load_dino_model(model, 'DINO-S.pth', verbose=True)
