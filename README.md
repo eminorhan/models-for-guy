@@ -74,10 +74,10 @@ where `2575` is the number of temporal classes in this case.
 
 ### DINO models trained on headcam data from baby S and on ImageNet
 
-We further trained two models using the self-supervised DINO algorithm either on the headcam data from baby S described above or on ImageNet. The models were trained identically, the only difference was the dataset used for training, hence this pair of models are useful for testing the effect of pretraining dataset on relation learning. Both models were trained for 30 epochs.
+We further trained two models using the self-supervised DINO algorithm either on the headcam data from baby S described above or on ImageNet. The models were trained identically, the only difference was the dataset used for training, hence this pair of models are useful for testing the effect of pretraining dataset on relation learning. Both models were trained for 37 epochs.
 
 * [`DINO-S.pth`](): DINO model trained on headcam data from baby S.
-* [`DINO-ImageNet.pth`](): DINO model trained on ImageNet.
+* [`DINO-ImageNet.pth`](https://drive.google.com/file/d/1lWADEQAdTAXvLIn5Jc7OTTLwjINaXOYP/view?usp=sharing): DINO model trained on ImageNet ([training log]()).
 
 For loading these checkpoints, I provide a function [`load_dino_model`](https://github.com/eminorhan/models-for-guy/blob/master/load_dino_model.py) in this repository; simply use it like this:
 ```python
