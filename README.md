@@ -4,7 +4,7 @@ This repository contains pretrained models for Guy's relation learning project t
 
 ### Temporal classification (TC) models trained with or without horizontal/vertical flip augmentations
 
-We trained four models on headcam data from **baby S** (sampled at 1 fps; ~741K frames total) using the temporal classification objective. All models were trained for 20 epochs using the Adam optimizer with learning rate 0.0005. The models only differ in whether or not horizontal/vertical flip augmentations were used during training. These models are useful for testing the effect of horizontal/vertical flip augmentations in relational learning.
+We trained four models on headcam data from **baby S** (sampled at 1 fps; ~741K frames total) using the temporal classification objective. All models were trained for 20 epochs using the Adam optimizer with learning rate 0.0005. The models only differ in whether or not horizontal/vertical flip augmentations were used during training. These models are thus useful for testing the effect of horizontal/vertical flip augmentations in relational learning.
 
 * [`TC-S-hv.tar`](https://drive.google.com/file/d/1Q5eIZyA00vSxboYC1dcb6BZa6BzP5Pe5/view?usp=sharing): model using both horizontal and vertical flip augmentations. The data augmentation pipeline used during pre-training (where `transforms` is `torchvision.transforms`):
 ```python
@@ -74,14 +74,14 @@ where `2575` is the number of temporal classes in this case.
 
 ### DINO models trained on headcam data from baby S and on ImageNet
 
-We further trained two models using the self-supervised DINO algorithm either on the headcam data from baby S described above or on ImageNet. The models were trained nearly identically, the only differences were the dataset used for training and the learning rate (0.0005 for ImageNet, 0.0003 for baby S: this was necessary to ensure stability during training in the latter case). Hence, this pair of models are useful for testing the effect of pretraining dataset on relation learning. The ImageNet model was trained for 37 epochs and the baby S model was trained for 38 epochs.
+We further trained two models using the self-supervised DINO algorithm either on the headcam data from baby S described above or on ImageNet. The models were trained nearly identically, the only difference being the freezing of the top layer parameters for the first epoch for ImageNet (this was necessary to speed up training). Hence, this pair of models are useful for testing the effect of pretraining dataset on relation learning. No horizontal or vertical flip augmentations were used during training for either model. The ImageNet model was trained for 40 epochs and the baby S model was trained for 69 epochs (this corresponds to roughly same number of training iterations for both models).
 
-* [`DINO-S.pth`](https://drive.google.com/file/d/1FqpjQQDhKj4sCnjL-utzPuu8-tmBi5Gi/view?usp=sharing): DINO model trained on headcam data from baby S ([training log](https://github.com/eminorhan/models-for-guy/blob/master/assets/DINO-S-log.txt)).
-* [`DINO-ImageNet.pth`](https://drive.google.com/file/d/1lWADEQAdTAXvLIn5Jc7OTTLwjINaXOYP/view?usp=sharing): DINO model trained on ImageNet ([training log](https://github.com/eminorhan/models-for-guy/blob/master/assets/DINO-ImageNet-log.txt)).
+* [`DINO-S.pth`](https://drive.google.com/file/d/1ZzNjjht94XsB4Pv5eia3JVavAfOOZMbR/view?usp=sharing): DINO model trained on headcam data from baby S ([training log](https://github.com/eminorhan/models-for-guy/blob/master/assets/DINO-S-log.txt)).
+* [`DINO-ImageNet.pth`](https://drive.google.com/file/d/1JThfiFZMm2QrknMRqZoaqwXXpikNDV8t/view?usp=sharing): DINO model trained on ImageNet ([training log](https://github.com/eminorhan/models-for-guy/blob/master/assets/DINO-ImageNet-log.txt)).
 
 For loading these checkpoints, I provide a function [`load_dino_model`](https://github.com/eminorhan/models-for-guy/blob/master/load_dino_model.py) in this repository; simply use it like this:
 ```python
 model = models.resnext50_32x4d(pretrained=False)
 model = load_dino_model(model, 'DINO-S.pth', verbose=True)
 ```
-Please let me know if you encounter any issues.
+I also provide the training code and scripts for training these models in case there are any questions about the training details. Please let me know if you encounter any issues.
