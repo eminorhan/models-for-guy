@@ -84,4 +84,4 @@ For loading these checkpoints, I provide a function [`load_dino_model`](https://
 model = models.resnext50_32x4d(pretrained=False)
 model = load_dino_model(model, 'DINO-S.pth', verbose=True)
 ```
-I also provide the training code ([`train_dino_epoch.py`](https://github.com/eminorhan/models-for-guy/blob/master/train_dino_epoch.py)) and scripts ([`train_dino_guy.sh`](https://github.com/eminorhan/models-for-guy/blob/master/train_dino_guy.sh)) for training these models in case there are any questions about the training details. Please let me know if you encounter any issues.
+I also provide the training code ([`train_dino_epoch.py`](https://github.com/eminorhan/models-for-guy/blob/master/train_dino_epoch.py)) and scripts ([`train_dino_guy.sh`](https://github.com/eminorhan/models-for-guy/blob/master/train_dino_guy.sh)) that I used for training these models in case there are any questions about the training details. Please let me know if you encounter any issues.
